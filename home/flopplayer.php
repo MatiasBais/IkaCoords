@@ -152,7 +152,7 @@ if (empty($_GET['offset'])) {
 
                                         ?>
                                         <option value="<?php echo $row['numero']; ?>" <?php if ($fecha == $row['numero'])
-                                              echo 'selected'; ?>>
+                                               echo 'selected'; ?>>
                                             <?php echo $row['Fecha'] ?>
                                         </option>
 
@@ -179,7 +179,7 @@ if (empty($_GET['offset'])) {
 
                                         ?>
                                         <option value="<?php echo $row['numero']; ?>" <?php if ($fecha2 == $row['numero'])
-                                              echo 'selected'; ?>>
+                                               echo 'selected'; ?>>
                                             <?php echo $row['Fecha'] ?>
                                         </option>
 
@@ -256,7 +256,7 @@ if (empty($_GET['offset'])) {
         join updates ua on ua.numero =a.update
         join updates ub on ub.numero=b.update
 		left join alianza on player.idAlianza = alianza.idalianza 
-        where ub.numero = (select max(p3.update) from puntos p3 where p3.update<=" . $fecha2 . " and p3.idplayer=player.idplayer) 
+        where ub.numero = " . $fecha2 . " 
         and ua.numero= (select min(p2.update) from puntos p2 where p2.idplayer=player.idplayer and p2.update>=" . $fecha . ") 
         and  player.server = '" . $server . "' and (alianza.server = '" . $server . "' or alianza.server is null) and ua.server = '" . $server . "' and ub.server = '" . $server . "' 
         order by " . $order . " asc 

@@ -101,12 +101,12 @@ if (empty($_GET['offset'])) {
 
         ?>
         <script>
-            var selectEl = document.getElementById('server');
-            selectEl.onchange = function () {
-                var goto = this.value;
-                window.location = window.location.href.split('?')[0] + "?server=" + this.value;
+        var selectEl = document.getElementById('server');
+        selectEl.onchange = function() {
+            var goto = this.value;
+            window.location = window.location.href.split('?')[0] + "?server=" + this.value;
 
-            };
+        };
         </script>
         <div class="middle">
 
@@ -151,12 +151,12 @@ if (empty($_GET['offset'])) {
                                     foreach ($rows as $row):
 
                                         ?>
-                                        <option value="<?php echo $row['numero']; ?>" <?php if ($fecha == $row['numero'])
+                                <option value="<?php echo $row['numero']; ?>" <?php if ($fecha == $row['numero'])
                                                echo 'selected'; ?>>
-                                            <?php echo $row['Fecha'] ?>
-                                        </option>
+                                    <?php echo $row['Fecha'] ?>
+                                </option>
 
-                                        <?php
+                                <?php
                                     endforeach;
                                 endif;
                                 ?>
@@ -178,12 +178,12 @@ if (empty($_GET['offset'])) {
                                     foreach ($rows as $row):
 
                                         ?>
-                                        <option value="<?php echo $row['numero']; ?>" <?php if ($fecha2 == $row['numero'])
+                                <option value="<?php echo $row['numero']; ?>" <?php if ($fecha2 == $row['numero'])
                                                echo 'selected'; ?>>
-                                            <?php echo $row['Fecha'] ?>
-                                        </option>
+                                    <?php echo $row['Fecha'] ?>
+                                </option>
 
-                                        <?php
+                                <?php
                                     endforeach;
                                 endif;
                                 ?>
@@ -198,44 +198,44 @@ if (empty($_GET['offset'])) {
                             <select name="cla" id="cla">
                                 <option value="Totales" <?php if ($cla == 'Totales')
                                     echo 'selected' ?>>Puntación Total
-                                    </option>
-                                    <option value="Constructor" <?php if ($cla == 'Constructor')
+                                </option>
+                                <option value="Constructor" <?php if ($cla == 'Constructor')
                                     echo 'selected' ?>>Maestro
-                                        Constructor</option>
-                                    <option value="Investigadores" <?php if ($cla == 'Investigadores')
+                                    Constructor</option>
+                                <option value="Investigadores" <?php if ($cla == 'Investigadores')
                                     echo 'selected' ?>>
-                                        Investigadores</option>
-                                    <option value="Generales" <?php if ($cla == 'Generales')
+                                    Investigadores</option>
+                                <option value="Generales" <?php if ($cla == 'Generales')
                                     echo 'selected' ?>>Generales
-                                    </option>
-                                    <option value="Oro" <?php if ($cla == 'Oro')
+                                </option>
+                                <option value="Oro" <?php if ($cla == 'Oro')
                                     echo 'selected' ?>>Reserva de Oro</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" name="" id="">
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                <br>
-                <h2>Players</h2>
-                <br>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" name="" id="">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br>
+            <h2>Players</h2>
+            <br>
 
-                <table class="results">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Player</th>
-                            <th>Aliance</th>
-                            <th>Points</th>
-                            <th>Change</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+            <table class="results">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Aliance</th>
+                        <th>Points</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
                                 $order = "";
                                 if ($cla == "Totales")
                                     $order = "((b.Constructor+b.Investigadores+b.Generales)-(a.Constructor+a.Investigadores+a.Generales))";
@@ -256,7 +256,7 @@ if (empty($_GET['offset'])) {
             join updates ua on ua.numero =a.update
             join updates ub on ub.numero=b.update
             left join alianza on player.idAlianza = alianza.idalianza 
-            where ub.numero = (select max(p3.update) from puntos p3 where p3.update<=" . $fecha2 . " and p3.idplayer=player.idplayer) 
+            where ub.numero = " . $fecha2 . " 
             and ua.numero= (select min(p2.update) from puntos p2 where p2.idplayer=player.idplayer and p2.update>=" . $fecha . ") 
             and  player.server = '" . $server . "' and (alianza.server = '" . $server . "' or alianza.server is null) and ua.server = '" . $server . "' and ub.server = '" . $server . "' 
             order by " . $order . " desc 
@@ -270,28 +270,28 @@ if (empty($_GET['offset'])) {
                                     foreach ($rows as $row):
 
                                         ?>
-                            <tr class="active-row">
-                                <td>
-                                    <?php echo $i; ?>
-                                </td>
-                                <td><a
-                                        href="../search/searchplayer.php?player=<?php echo $row['nombre']; ?>&server=<?php echo $server; ?>">
-                                        <?php echo $row['nombre']; ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php echo $row['ali']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $row[$cla]; ?>
-                                </td>
-                                <td>
-                                    <?php echo $row['Δ-' . $cla]; ?>
-                                </td>
-                            </tr>
-                        </tbody>
+                    <tr class="active-row">
+                        <td>
+                            <?php echo $i; ?>
+                        </td>
+                        <td><a
+                                href="../search/searchplayer.php?player=<?php echo $row['nombre']; ?>&server=<?php echo $server; ?>">
+                                <?php echo $row['nombre']; ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?php echo $row['ali']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row[$cla]; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['Δ-' . $cla]; ?>
+                        </td>
+                    </tr>
+                </tbody>
 
-                        <?php
+                <?php
                         $i++;
                                     endforeach;
                                 endif;
